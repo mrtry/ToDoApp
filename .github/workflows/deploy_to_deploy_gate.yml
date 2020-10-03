@@ -1,0 +1,32 @@
+name: Deploy to DeployGate
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Run unit test
+        run: ./gradlew testDebugUnitTest
+
+      - name: Build app
+        run: ./gradlew assemble
+
+      - name: Deploy to DeployGate
+        run: ./gradlew uploadDeployGateDebug
+        env:
+          DEPLOYGATE_API_TOKEN: ${{ secrets.DEPLOYGATE_API_TOKEN }}
+          DEPLOYGATE_APP_OWNER_NAME: ${{ secrets.DEPLOYGATE_APP_OWNER_NAME }}
