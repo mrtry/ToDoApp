@@ -1,4 +1,4 @@
-package io.github.mrtry.todolist.app.todo.ui
+package io.github.mrtry.todolist.app.splash.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import io.github.mrtry.todolist.MainApplication
 import io.github.mrtry.todolist.R
-import io.github.mrtry.todolist.app.todo.ui.navigator.LoginNavigator
-import io.github.mrtry.todolist.app.todo.ui.result.LoginActivityResult
-import io.github.mrtry.todolist.app.todo.viewmodel.LoginViewModel
-import io.github.mrtry.todolist.databinding.ActivityLoginBinding
+import io.github.mrtry.todolist.app.splash.ui.navigator.SplashNavigator
+import io.github.mrtry.todolist.app.splash.ui.result.SplashActivityResult
+import io.github.mrtry.todolist.app.splash.viewmodel.SplashViewModel
+import io.github.mrtry.todolist.databinding.ActivitySplashBinding
 import io.github.mrtry.todolist.di.Injectable
 import io.github.mrtry.todolist.di.component.LoginComponent
 import io.github.mrtry.todolist.di.module.ActivityModule
@@ -17,19 +17,19 @@ import io.github.mrtry.todolist.misc.ui.binding.Bindable
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
-class LoginActivity : AppCompatActivity(), Injectable<LoginComponent>, Bindable<ActivityLoginBinding> {
+class SplashActivity : AppCompatActivity(), Injectable<LoginComponent>, Bindable<ActivitySplashBinding> {
 
     @Inject
-    internal lateinit var viewModel: LoginViewModel
+    internal lateinit var viewModel: SplashViewModel
 
     @Inject
-    internal lateinit var navigator: LoginNavigator
+    internal lateinit var navigator: SplashNavigator
 
     @Inject
     internal lateinit var coroutineScope: CoroutineScope
 
-    override val viewBinding: ActivityLoginBinding by lazy {
-        DataBindingUtil.setContentView(this, R.layout.activity_login)
+    override val viewBinding: ActivitySplashBinding by lazy {
+        DataBindingUtil.setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)
     }
 
     override val component: LoginComponent by lazy {
@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity(), Injectable<LoginComponent>, Bindable<
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        LoginActivityResult
+        SplashActivityResult
             .valueOf(requestCode)
             .getResultHandler(component)
             .handleResult(resultCode, data)

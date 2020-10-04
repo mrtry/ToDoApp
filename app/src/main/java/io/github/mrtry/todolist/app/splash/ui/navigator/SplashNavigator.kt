@@ -1,15 +1,15 @@
-package io.github.mrtry.todolist.app.todo.ui.navigator
+package io.github.mrtry.todolist.app.splash.ui.navigator
 
 import android.app.Activity
 import com.firebase.ui.auth.AuthUI
-import io.github.mrtry.todolist.app.todo.ui.result.LoginActivityResult
+import io.github.mrtry.todolist.app.splash.ui.result.SplashActivityResult
 import io.github.mrtry.todolist.di.scope.ActivityScope
 import io.github.mrtry.todolist.misc.ui.navigator.AbsNavigator
 import timber.log.Timber
 import javax.inject.Inject
 
 @ActivityScope
-class LoginNavigator
+class SplashNavigator
 @Inject constructor(
     private val activity: Activity
 ) : AbsNavigator(activity) {
@@ -28,6 +28,6 @@ class LoginNavigator
             .setAvailableProviders(providers)
             .build()
 
-        activity.startActivityForResult(intent, LoginActivityResult.AUTH.requestCode)
+        activity.startActivityForResult(intent, SplashActivityResult.AUTH.requestCode)
     }
 }

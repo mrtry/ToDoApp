@@ -1,15 +1,15 @@
-package io.github.mrtry.todolist.app.todo.viewmodel
+package io.github.mrtry.todolist.app.splash.viewmodel
 
-import io.github.mrtry.todolist.app.todo.ui.navigator.LoginNavigator
+import io.github.mrtry.todolist.app.splash.ui.navigator.SplashNavigator
 import io.github.mrtry.todolist.auth.AuthenticationClient
 import io.github.mrtry.todolist.di.scope.ActivityScope
 import javax.inject.Inject
 
 @ActivityScope
-class LoginViewModel
+class SplashViewModel
 @Inject constructor(
     private val authenticationClient: AuthenticationClient,
-    private val navigator: LoginNavigator
+    private val navigator: SplashNavigator
 ) {
     fun ensuredLoggedIn() {
         if (!authenticationClient.isLoggedIn()) {
