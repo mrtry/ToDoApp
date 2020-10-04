@@ -12,8 +12,9 @@ class SplashViewModel
     private val navigator: SplashNavigator
 ) {
     fun ensuredLoggedIn() {
-        if (!authenticationClient.isLoggedIn()) {
-            navigator.navigateToAuthentication()
+        when (authenticationClient.isLoggedIn()) {
+            true -> navigator.navigateToToDo()
+            false -> navigator.navigateToAuthentication()
         }
     }
 }
