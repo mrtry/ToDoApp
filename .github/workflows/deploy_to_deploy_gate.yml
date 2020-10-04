@@ -19,6 +19,13 @@ jobs:
         with:
           java-version: 1.8
 
+      # google-service.jsonをデコードする
+      # see:https://qiita.com/sudo5in5k/items/5b6da5dbba3fc2514319
+      - name: decode google-service
+        env:
+          GOOGLE_SERVICE: ${{ secrets.GOOGLE_SERVICE_JSON }}
+        run: echo $GOOGLE_SERVICE | base64 --decode --ignore-garbage > ./app/google-services.json
+
       - name: Run unit test
         run: ./gradlew testDebugUnitTest
 
