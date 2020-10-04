@@ -1,13 +1,13 @@
-package io.github.mrtry.todolist.todo.ui
+package io.github.mrtry.todolist.app.todo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.github.mrtry.todolist.MainApplication
 import io.github.mrtry.todolist.R
+import io.github.mrtry.todolist.app.todo.viewmodel.LoginViewModel
 import io.github.mrtry.todolist.di.Injectable
 import io.github.mrtry.todolist.di.component.LoginComponent
 import io.github.mrtry.todolist.di.module.ActivityModule
-import io.github.mrtry.todolist.todo.viewmodel.LoginViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancelChildren
 import javax.inject.Inject
