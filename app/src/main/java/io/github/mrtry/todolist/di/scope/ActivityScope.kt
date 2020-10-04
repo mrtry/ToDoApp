@@ -1,4 +1,4 @@
-package io.github.mrtry.todolists.di.scope
+package io.github.mrtry.todolist.di.scope
 
 import javax.inject.Scope
 

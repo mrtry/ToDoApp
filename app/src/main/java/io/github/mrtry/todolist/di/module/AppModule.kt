@@ -1,4 +1,4 @@
-package io.github.mrtry.todolists.di.module
+package io.github.mrtry.todolist.di.module
 
 import android.app.Application
 import dagger.Module

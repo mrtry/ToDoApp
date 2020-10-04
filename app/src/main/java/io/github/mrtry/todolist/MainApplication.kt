@@ -1,9 +1,9 @@
-package io.github.mrtry.todolists
+package io.github.mrtry.todolist
 
 import android.app.Application
 import android.content.Context
-import io.github.mrtry.todolists.di.component.AppComponent
-import io.github.mrtry.todolists.di.component.DaggerAppComponent
+import io.github.mrtry.todolist.di.component.AppComponent
+import io.github.mrtry.todolist.di.component.DaggerAppComponent
 
 
 class MainApplication : Application() {

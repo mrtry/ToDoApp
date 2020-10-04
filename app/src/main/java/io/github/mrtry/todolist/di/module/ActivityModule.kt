@@ -1,4 +1,4 @@
-package io.github.mrtry.todolists.di.module
+package io.github.mrtry.todolist.di.module
 
 import android.app.Activity
 import android.content.Context
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import dagger.Module
 import dagger.Provides
-import io.github.mrtry.todolists.di.scope.ActivityScope
+import io.github.mrtry.todolist.di.scope.ActivityScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
