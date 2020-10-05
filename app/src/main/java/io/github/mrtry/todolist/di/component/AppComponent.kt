@@ -12,4 +12,5 @@ interface AppComponent {
     fun inject(application: MainApplication)
 
     fun plusLoginComponent(module: ActivityModule): LoginComponent
+    fun plusToDoComponent(module: ActivityModule): ToDoComponent
 }

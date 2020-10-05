@@ -14,7 +14,6 @@ import io.github.mrtry.todolist.di.Injectable
 import io.github.mrtry.todolist.di.component.LoginComponent
 import io.github.mrtry.todolist.di.module.ActivityModule
 import io.github.mrtry.todolist.misc.ui.binding.Bindable
-import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity(), Injectable<LoginComponent>, Bindable<ActivitySplashBinding> {
@@ -24,9 +23,6 @@ class SplashActivity : AppCompatActivity(), Injectable<LoginComponent>, Bindable
 
     @Inject
     internal lateinit var navigator: SplashNavigator
-
-    @Inject
-    internal lateinit var coroutineScope: CoroutineScope
 
     override val viewBinding: ActivitySplashBinding by lazy {
         DataBindingUtil.setContentView<ActivitySplashBinding>(this, R.layout.activity_splash)

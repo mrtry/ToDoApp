@@ -3,9 +3,9 @@ package io.github.mrtry.todolist.app.splash.ui.navigator
 import android.app.Activity
 import com.firebase.ui.auth.AuthUI
 import io.github.mrtry.todolist.app.splash.ui.result.SplashActivityResult
+import io.github.mrtry.todolist.app.todo.ui.ToDoActivity
 import io.github.mrtry.todolist.di.scope.ActivityScope
 import io.github.mrtry.todolist.misc.ui.navigator.AbsNavigator
-import timber.log.Timber
 import javax.inject.Inject
 
 @ActivityScope
@@ -14,8 +14,9 @@ class SplashNavigator
     private val activity: Activity
 ) : AbsNavigator(activity) {
     fun navigateToToDo() {
-        // TODO
-        Timber.d("navigateToToDo() called")
+        val intent = ToDoActivity.createIntent(activity)
+        activity.startActivity(intent)
+        finishCurrentActivity()
     }
 
     fun navigateToAuthentication() {
