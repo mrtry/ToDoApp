@@ -40,6 +40,16 @@ class ToDoActivity : AppCompatActivity(), Injectable<ToDoComponent>, Bindable<Ac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         component.inject(this)
-        viewBinding
+        setSupportActionBar(viewBinding.toolbar)
+
+        with(viewBinding) {
+            viewModel = this@ToDoActivity.viewModel
+            lifecycleOwner = this@ToDoActivity
+
+            with(bannerAddTask) {
+                viewModel = this@ToDoActivity.viewModel.taskViewModel
+                lifecycleOwner = this@ToDoActivity
+            }
+        }
     }
 }

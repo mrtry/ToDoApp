@@ -5,6 +5,15 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarStyle">@style/Widget.Toolbar</item>
     </style>
 
+    <style name="Base.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="titleTextAppearance">@style/TextAppearance.AppCompat.Title</item>
+    </style>
+
+    <style name="Widget.Toolbar" parent="Base.Widget.Toolbar">
+        <item name="android:elevation">@dimen/elevation_toolbar</item>
+    </style>
 </resources>
