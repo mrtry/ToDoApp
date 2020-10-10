@@ -9,5 +9,4 @@ import javax.inject.Inject
 class ToDoNavigator
 @Inject constructor(
     private val activity: Activity
-) : AbsNavigator(activity) {
-}
+) : AbsNavigator(activity)

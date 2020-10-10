@@ -4,6 +4,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="io.github.mrtry.todolist.app.todo.viewmodel.TaskViewModel" />
@@ -11,28 +13,44 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/list_item_container_height_one_line">
 
-        <ImageButton
-            android:id="@+id/add_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/ic_add"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@android:color/transparent"
-            android:onClick="@{viewModel::onAddTaskButtonClick}" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/add_button"
+                android:layout_width="@dimen/banner_add_task_button_container"
+                android:layout_height="@dimen/banner_add_task_button_container"
+                android:src="@drawable/ic_add"
+                android:foreground="?attr/selectableItemBackground"
+                android:background="@android:color/transparent"
+                android:visibility="@{safeUnbox(viewModel.isSaving) ? View.GONE : View.VISIBLE}"
+                android:onClick="@{viewModel::onAddTaskButtonClick}" />
+
+            <ProgressBar
+                android:layout_width="@dimen/banner_add_task_progress_container"
+                android:layout_height="@dimen/banner_add_task_progress_container"
+                android:layout_marginVertical="@dimen/banner_add_task_progress_margin"
+                android:layout_marginHorizontal="@dimen/banner_add_task_progress_margin"
+                android:visibility="@{safeUnbox(viewModel.isSaving) ? View.VISIBLE : View.GONE}" />
+        </FrameLayout>
 
         <EditText
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/add_button"
+            app:layout_constraintStart_toEndOf="@+id/container"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/banner_add_task_form_margin"
+            android:enabled="@{!safeUnbox(viewModel.isSaving)}"
+            android:focusable="@{!safeUnbox(viewModel.isSaving)}"
             android:text="@={viewModel.taskName}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
