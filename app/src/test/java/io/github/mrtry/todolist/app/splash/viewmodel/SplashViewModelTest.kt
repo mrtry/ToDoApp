@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.github.mrtry.todolist.app.splash.ui.navigator.SplashNavigator
-import io.github.mrtry.todolist.auth.AuthenticationClient
+import io.github.mrtry.todolist.auth.AccountRepository
 import org.junit.Before
 import org.junit.Test
 
@@ -13,7 +13,7 @@ class SplashViewModelTest {
 
     private lateinit var viewModel: SplashViewModel
 
-    private lateinit var mockClient: AuthenticationClient
+    private lateinit var mockClient: AccountRepository
     private lateinit var mockNavigator: SplashNavigator
 
     @Before
