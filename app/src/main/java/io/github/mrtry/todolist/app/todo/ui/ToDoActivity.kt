@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.mrtry.todolist.MainApplication
 import io.github.mrtry.todolist.R
+import io.github.mrtry.todolist.app.todo.ui.adapter.ToDoAdapter
 import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.app.todo.viewmodel.ToDoViewModel
 import io.github.mrtry.todolist.databinding.ActivityToDoBinding
@@ -50,6 +52,13 @@ class ToDoActivity : AppCompatActivity(), Injectable<ToDoComponent>, Bindable<Ac
                 viewModel = this@ToDoActivity.viewModel.taskViewModel
                 lifecycleOwner = this@ToDoActivity
             }
+
+            with(list) {
+                adapter = ToDoAdapter(this@ToDoActivity, this@ToDoActivity.viewModel.items, this@ToDoActivity)
+                layoutManager = LinearLayoutManager(this@ToDoActivity)
+            }
         }
+
+        viewModel.load()
     }
 }

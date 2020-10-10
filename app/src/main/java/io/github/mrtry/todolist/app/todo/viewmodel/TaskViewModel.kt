@@ -38,10 +38,10 @@ class TaskViewModel
                 if (e is CancellationException) return@launch
 
                 Timber.e(e)
-                navigator.showSnackBar(R.string.to_do_activity_error_failed)
+                navigator.showSnackBar(R.string.to_do_activity_error_add_task_failed)
+            } finally {
+                isSaving.value = false
             }
-
-            isSaving.value = false
         }
     }
 }

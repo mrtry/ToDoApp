@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ToDoList</string>
-    <string name="to_do_activity_error_failed">登録に失敗しました。再度お試しください。</string>
+    <string name="to_do_activity_error_add_task_failed">登録に失敗しました。再度お試しください。</string>
+    <string name="to_do_activity_error_get_task_failed">取得に失敗しました。再度お試しください。</string>
 </resources>

@@ -1,4 +1,4 @@
-package io.github.mrtry.todolist.misc.ui.extension
+package io.github.mrtry.todolist.misc.extension
 
 import androidx.databinding.ObservableList
 
