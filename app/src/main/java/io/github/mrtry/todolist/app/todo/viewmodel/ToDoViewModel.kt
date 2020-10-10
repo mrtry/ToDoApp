@@ -12,6 +12,7 @@ import io.github.mrtry.todolist.misc.ui.viewmodel.ToolbarViewModel
 import io.github.mrtry.todolist.todo.domainservice.ToDoDomainService
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -33,31 +34,31 @@ class ToDoViewModel
 
     override fun onRefresh() {
         isRefreshing.value = true
-        items.clear()
         load()
     }
 
     fun load() {
         coroutineScope.launch {
             try {
-                toDoDomainService.get().also { todo ->
-                    todo.map {
+                toDoDomainService.connectToRepository().collect { todos ->
+                    items.clear()
+                    todos.map {
                         items.add(
                             converter.convert(it)
                         )
                     }
+
+                    isRefreshing.value = false
+                    showEmptyStatus.value = items.isEmpty()
                 }
             } catch (e: Exception) {
                 if (e is CancellationException) return@launch
 
                 Timber.e(e)
-                navigator.showSnackBar(R.string.to_do_activity_error_get_task_failed)
-            } finally {
                 isRefreshing.value = false
                 showEmptyStatus.value = items.isEmpty()
+                navigator.showSnackBar(R.string.to_do_activity_error_get_task_failed)
             }
         }
     }
-
-
 }

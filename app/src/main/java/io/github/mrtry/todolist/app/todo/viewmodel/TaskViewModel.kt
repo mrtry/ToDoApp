@@ -35,7 +35,7 @@ class TaskViewModel
             val todo = ToDo(title = taskName.value.orEmpty())
 
             try {
-                domainService.save(todo)
+                domainService.saveToRepository(todo)
                 taskName.value = ""
             } catch (e: Exception) {
                 if (e is CancellationException) return@launch

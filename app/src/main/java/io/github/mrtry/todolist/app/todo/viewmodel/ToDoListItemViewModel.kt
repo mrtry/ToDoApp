@@ -38,7 +38,7 @@ class ToDoListItemViewModel(
                 isSaving.value = true
 
                 try {
-                    domainService.save(it)
+                    domainService.saveToRepository(it)
                     currentIsCompleteState = isComplete.requireValue()
                 } catch (e: Exception) {
                     if (e is CancellationException) return@launch
