@@ -1,6 +1,9 @@
 package io.github.mrtry.todolist.app.todo.viewmodel
 
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.lifecycle.MutableLiveData
 import io.github.mrtry.todolist.R
 import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
@@ -20,7 +23,7 @@ class TaskViewModel
     private val navigator: ToDoNavigator,
     private val domainService: ToDoDomainService,
     private val coroutineScope: CoroutineScope
-) {
+) : TextView.OnEditorActionListener {
     val taskName: MutableLiveData<String> = MutableLiveData("")
     val isSaving: MutableLiveData<Boolean> = MutableLiveData(false)
 
@@ -43,5 +46,12 @@ class TaskViewModel
                 isSaving.value = false
             }
         }
+    }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, keyEvent: KeyEvent?): Boolean {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            onAddTaskButtonClick(v)
+        }
+        return false
     }
 }

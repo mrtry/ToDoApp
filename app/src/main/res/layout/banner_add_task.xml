@@ -48,9 +48,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/container"
             app:layout_constraintEnd_toEndOf="parent"
+            android:inputType="text"
+            android:imeOptions="actionDone"
             android:layout_marginStart="@dimen/banner_add_task_form_margin"
             android:enabled="@{!safeUnbox(viewModel.isSaving)}"
             android:focusable="@{!safeUnbox(viewModel.isSaving)}"
+            app:editorActionListener="@{viewModel}"
             android:text="@={viewModel.taskName}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
