@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="elevation_toolbar">4dp</dimen>
+
     <dimen name="splash_icon_square_size">96dp</dimen>
+
+    <dimen name="banner_add_task_button_container">48dp</dimen>
+    <dimen name="banner_add_task_progress_container">24dp</dimen>
+    <dimen name="banner_add_task_progress_margin">12dp</dimen>
+    <dimen name="banner_add_task_form_margin">8dp</dimen>
+
+    <dimen name="list_item_container_height_one_line">56dp</dimen>
+    <dimen name="list_item_margin_horizontal">16dp</dimen>
+    <dimen name="list_item_check_box_margin_start">8dp</dimen>
+    <dimen name="list_item_divider_height">1dp</dimen>
 </resources>

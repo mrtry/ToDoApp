@@ -8,16 +8,13 @@ import io.github.mrtry.todolist.app.splash.ui.navigator.SplashNavigator
 import io.github.mrtry.todolist.auth.AuthenticationClient
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class SplashViewModelTest {
 
-    lateinit var viewModel: SplashViewModel
+    private lateinit var viewModel: SplashViewModel
 
-    lateinit var mockClient: AuthenticationClient
-    lateinit var mockNavigator: SplashNavigator
+    private lateinit var mockClient: AuthenticationClient
+    private lateinit var mockNavigator: SplashNavigator
 
     @Before
     fun setUp() {
