@@ -16,6 +16,8 @@ import io.github.mrtry.todolist.di.Injectable
 import io.github.mrtry.todolist.di.component.ToDoComponent
 import io.github.mrtry.todolist.di.module.ActivityModule
 import io.github.mrtry.todolist.misc.ui.binding.Bindable
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.cancelChildren
 import javax.inject.Inject
 
 class ToDoActivity : AppCompatActivity(), Injectable<ToDoComponent>, Bindable<ActivityToDoBinding> {
@@ -29,6 +31,9 @@ class ToDoActivity : AppCompatActivity(), Injectable<ToDoComponent>, Bindable<Ac
 
     @Inject
     internal lateinit var navigator: ToDoNavigator
+
+    @Inject
+    internal lateinit var coroutineScope: CoroutineScope
 
     override val viewBinding: ActivityToDoBinding by lazy {
         DataBindingUtil.setContentView<ActivityToDoBinding>(this, R.layout.activity_to_do)
@@ -60,5 +65,10 @@ class ToDoActivity : AppCompatActivity(), Injectable<ToDoComponent>, Bindable<Ac
         }
 
         viewModel.load()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        coroutineScope.coroutineContext.cancelChildren()
     }
 }
