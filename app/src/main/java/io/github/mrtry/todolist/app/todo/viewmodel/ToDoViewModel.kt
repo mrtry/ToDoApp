@@ -27,6 +27,7 @@ class ToDoViewModel
     private val coroutineScope: CoroutineScope
 ) : SwipeRefreshLayout.OnRefreshListener {
     val isRefreshing: MutableLiveData<Boolean> = MutableLiveData(false)
+    val showEmptyStatus: MutableLiveData<Boolean> = MutableLiveData(false)
 
     val items: ObservableList<ToDoListItemViewModel> = ObservableArrayList()
 
@@ -53,6 +54,7 @@ class ToDoViewModel
                 navigator.showSnackBar(R.string.to_do_activity_error_get_task_failed)
             } finally {
                 isRefreshing.value = false
+                showEmptyStatus.value = items.isEmpty()
             }
         }
     }
