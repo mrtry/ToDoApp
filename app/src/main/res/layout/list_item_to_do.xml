@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="io.github.mrtry.todolist.app.todo.viewmodel.ToDoListItemViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_container_height_one_line">
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/list_item_check_box_margin_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:enabled="@{!safeUnbox(viewModel.isSaving())}"
+            android:checked="@={viewModel.isComplete}" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/list_item_margin_horizontal"
+            app:layout_constraintStart_toEndOf="@id/checkbox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{viewModel.todo.title}"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_divider_height"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="?android:attr/dividerVertical" />
+
+        <View
+            android:id="@+id/progress_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/disabled_view_backgroud"
+            android:visibility="@{safeUnbox(viewModel.isSaving()) ? View.VISIBLE :View.GONE}" />
+
+        <ProgressBar
+            android:layout_width="@dimen/banner_add_task_progress_container"
+            android:layout_height="@dimen/banner_add_task_progress_container"
+            app:layout_constraintTop_toTopOf="@id/progress_background"
+            app:layout_constraintBottom_toBottomOf="@id/progress_background"
+            app:layout_constraintStart_toStartOf="@id/progress_background"
+            app:layout_constraintEnd_toEndOf="@id/progress_background"
+            android:visibility="@{safeUnbox(viewModel.isSaving()) ? View.VISIBLE :View.GONE}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

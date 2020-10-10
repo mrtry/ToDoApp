@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'deploygate'
 
 android {
@@ -8,7 +10,7 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "io.github.mrtry.todolists"
+        applicationId "io.github.mrtry.todolist"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -23,18 +25,82 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        dataBinding true
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    kapt {
+        javacOptions {
+            option("-Xmaxerrs", 5000)
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+
+        unitTests.all {
+            testLogging {
+                events 'started', 'passed', 'skipped', 'failed'
+            }
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
+    implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+    implementation 'com.google.android.material:material:1.2.1'
+
+    // dagger
+    def dagger_version = "2.29.1"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // coroutine
+    def coroutine_version = "1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:$coroutine_version"
 
     // deploy gate
     implementation 'com.deploygate:sdk:4.1.0'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-auth:19.4.0'
+    implementation 'com.google.firebase:firebase-firestore:21.7.0'
+    implementation 'com.firebaseui:firebase-ui-auth:6.2.0'
+
+    // test
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation 'androidx.test:core:1.3.0'
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation 'org.mockito:mockito-core:3.3.3'
+    testImplementation 'org.mockito:mockito-android:3.3.3'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    testImplementation "com.google.truth:truth:1.0.1"
+    testImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+
+    // other
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
