@@ -14,10 +14,10 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class SplashViewModelTest {
 
-    lateinit var viewModel: SplashViewModel
+    private lateinit var viewModel: SplashViewModel
 
-    lateinit var mockClient: AuthenticationClient
-    lateinit var mockNavigator: SplashNavigator
+    private lateinit var mockClient: AuthenticationClient
+    private lateinit var mockNavigator: SplashNavigator
 
     @Before
     fun setUp() {
