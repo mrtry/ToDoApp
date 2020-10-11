@@ -9,7 +9,7 @@ import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.app.todo.viewmodel.converter.ToDoListItemViewModelConverter
 import io.github.mrtry.todolist.di.scope.ActivityScope
 import io.github.mrtry.todolist.misc.ui.viewmodel.ToolbarViewModel
-import io.github.mrtry.todolist.todo.domainservice.ToDoDomainService
+import io.github.mrtry.todolist.task.domainservice.TaskDomainService
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collect
@@ -23,7 +23,7 @@ class ToDoViewModel
     val toolbarViewModel: ToolbarViewModel,
     val taskViewModel: TaskViewModel,
     private val navigator: ToDoNavigator,
-    private val toDoDomainService: ToDoDomainService,
+    private val taskDomainService: TaskDomainService,
     private val converter: ToDoListItemViewModelConverter,
     private val coroutineScope: CoroutineScope
 ) : SwipeRefreshLayout.OnRefreshListener {
@@ -40,7 +40,7 @@ class ToDoViewModel
     fun load() {
         coroutineScope.launch {
             try {
-                toDoDomainService.connectToRepository().collect { todos ->
+                taskDomainService.connectToRepository().collect { todos ->
                     items.clear()
                     todos.map {
                         items.add(

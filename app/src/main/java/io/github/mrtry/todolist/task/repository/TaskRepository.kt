@@ -1,10 +1,10 @@
-package io.github.mrtry.todolist.todo.repository
+package io.github.mrtry.todolist.task.repository
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import io.github.mrtry.todolist.misc.extension.await
 import io.github.mrtry.todolist.misc.extension.getDataFlow
-import io.github.mrtry.todolist.todo.entity.ToDo
+import io.github.mrtry.todolist.task.entity.Task
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -19,7 +19,7 @@ class ToDoRepository
 @Inject constructor() {
     private val db = FirebaseFirestore.getInstance()
 
-    suspend fun save(entity: ToDo) = withContext(Dispatchers.IO) {
+    suspend fun save(entity: Task) = withContext(Dispatchers.IO) {
         val id = entity.id ?: db.collection(COLLECTION_PATH).document().id
         val timestamp = entity.createdAt ?: Timestamp(Date())
 
@@ -34,11 +34,11 @@ class ToDoRepository
             .await()
     }
 
-    fun connect(): Flow<List<ToDo>> =
+    fun connect(): Flow<List<Task>> =
         db.collection(COLLECTION_PATH)
             .getDataFlow { querySnapshot ->
                 querySnapshot?.documents?.mapNotNull {
-                    it.toObject(ToDo::class.java)
+                    it.toObject(Task::class.java)
                 }
                     ?.toMutableList()
                     .also { list -> list?.sortBy { it.createdAt } }
