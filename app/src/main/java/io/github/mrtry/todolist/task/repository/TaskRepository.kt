@@ -35,6 +35,15 @@ class ToDoRepository
             .await()
     }
 
+    suspend fun remove(entity: Task) = withContext(Dispatchers.IO) {
+        val id = entity.id ?: throw IllegalStateException("entity.id is empty")
+
+        db.collection(COLLECTION_PATH)
+            .document(id)
+            .delete()
+            .await()
+    }
+
     fun connect(): Flow<List<Task>> =
         db.collection(COLLECTION_PATH)
             .getDataFlow(MetadataChanges.INCLUDE) { querySnapshot ->

@@ -19,6 +19,11 @@ class TaskDomainService
     }
 
     @Throws(FirebaseFirestoreException::class, IllegalArgumentException::class, IllegalStateException::class)
+    suspend fun removeFromRepository(entity: Task) = withContext(Dispatchers.IO) {
+        repository.remove(entity)
+    }
+
+    @Throws(FirebaseFirestoreException::class, IllegalArgumentException::class, IllegalStateException::class)
     suspend fun connectToRepository() = withContext(Dispatchers.IO) {
         repository.connect()
     }
