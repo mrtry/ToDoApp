@@ -71,6 +71,10 @@ class EditTaskDialogFragment : DialogFragment(), Injectable<EditTaskComponent>, 
             .plusEditTaskComponent(FragmentModule(this))
         component.inject(this)
 
+        savedInstanceState?.let {
+            viewModel.onRestoreInstanceState(it)
+        }
+
         with(viewBinding) {
             viewModel = this@EditTaskDialogFragment.viewModel
             lifecycleOwner = this@EditTaskDialogFragment
@@ -112,6 +116,11 @@ class EditTaskDialogFragment : DialogFragment(), Injectable<EditTaskComponent>, 
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        viewModel.onSaveInstanceState(outState)
     }
 
     override fun onStop() {

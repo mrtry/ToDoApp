@@ -7,6 +7,7 @@ import io.github.mrtry.todolist.R
 import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.misc.extension.observeNonNull
 import io.github.mrtry.todolist.misc.extension.requireValue
+import io.github.mrtry.todolist.misc.ui.viewmodel.ViewModel
 import io.github.mrtry.todolist.task.domainservice.TaskDomainService
 import io.github.mrtry.todolist.task.entity.Task
 import kotlinx.coroutines.CancellationException
@@ -20,7 +21,7 @@ class ToDoListItemViewModel(
     private val navigator: ToDoNavigator,
     private val domainService: TaskDomainService,
     private val coroutineScope: CoroutineScope
-) {
+) : ViewModel {
     val task: MutableLiveData<Task> = MutableLiveData(task)
     val isComplete: MutableLiveData<Boolean> = MutableLiveData(task.isComplete)
     val isSaving: MutableLiveData<Boolean> = MutableLiveData(false)
