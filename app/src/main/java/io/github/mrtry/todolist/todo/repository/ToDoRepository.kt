@@ -1,4 +1,4 @@
-package io.github.mrtry.todolist.todo.client
+package io.github.mrtry.todolist.todo.repository
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
