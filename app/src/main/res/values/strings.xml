@@ -8,5 +8,10 @@
     <string name="to_do_activity_alert_logout">ログアウトしますか？</string>
 
     <string name="edit_task_fragment_title">タスク詳細</string>
+    <string name="edit_task_fragment_label_title">タイトル</string>
+    <string name="edit_task_fragment_label_description">詳細</string>
     <string name="edit_task_fragment_menu_update">更新</string>
+    <string name="edit_task_fragment_alert_confirm">変更内容が保存されていません。画面を閉じますか？</string>
+    <string name="edit_task_fragment_alert_label_positive">閉じる</string>
+    <string name="edit_task_fragment_error_update_task_failed">更新に失敗しました。再度お試しください。</string>
 </resources>

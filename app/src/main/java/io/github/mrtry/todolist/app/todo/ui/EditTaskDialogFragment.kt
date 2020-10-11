@@ -7,19 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import io.github.mrtry.todolist.R
 import io.github.mrtry.todolist.app.todo.ui.navigator.EditTaskNavigator
+import io.github.mrtry.todolist.app.todo.viewmodel.EditTaskViewModel
 import io.github.mrtry.todolist.databinding.FragmentEditTaskBinding
 import io.github.mrtry.todolist.di.Injectable
 import io.github.mrtry.todolist.di.component.EditTaskComponent
 import io.github.mrtry.todolist.di.component.ToDoComponent
 import io.github.mrtry.todolist.di.module.FragmentModule
+import io.github.mrtry.todolist.di.scope.FragmentScope
 import io.github.mrtry.todolist.di.utils.ComponentUtils
 import io.github.mrtry.todolist.misc.ui.binding.Bindable
 import io.github.mrtry.todolist.task.entity.Task
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancelChildren
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -45,6 +47,9 @@ class EditTaskDialogFragment : DialogFragment(), Injectable<EditTaskComponent>, 
     override lateinit var component: EditTaskComponent
 
     @Inject
+    lateinit var viewModel: EditTaskViewModel
+
+    @Inject
     lateinit var navigator: EditTaskNavigator
 
     @Inject
@@ -66,8 +71,13 @@ class EditTaskDialogFragment : DialogFragment(), Injectable<EditTaskComponent>, 
             .plusEditTaskComponent(FragmentModule(this))
         component.inject(this)
 
+        with(viewBinding) {
+            viewModel = this@EditTaskDialogFragment.viewModel
+            lifecycleOwner = this@EditTaskDialogFragment
+        }
+
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            Timber.d("on back pressed")
+            navigator.showSavingAlert()
         }
 
         // DialogFragmentのcancel()を無効にして、back pressをハンドリングする
@@ -84,10 +94,13 @@ class EditTaskDialogFragment : DialogFragment(), Injectable<EditTaskComponent>, 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBinding.toolbar) {
-            setNavigationOnClickListener { navigator.onBackPressed() }
+            setNavigationOnClickListener {
+                navigator.onBackPressed()
+            }
+
             inflateMenu(R.menu.menu_fragment_edit_task)
             setOnMenuItemClickListener {
-                navigator.onBackPressed()
+                this@EditTaskDialogFragment.viewModel.onSaveClick()
                 true
             }
         }
@@ -105,4 +118,10 @@ class EditTaskDialogFragment : DialogFragment(), Injectable<EditTaskComponent>, 
         super.onStop()
         coroutineScope.coroutineContext.cancelChildren()
     }
+}
+
+@FragmentScope
+class EditTaskDialogFragmentValueHolder
+@Inject constructor(fragment: Fragment) {
+    val task: Task = fragment.requireArguments().getParcelable(KEY_TASK)!!
 }
