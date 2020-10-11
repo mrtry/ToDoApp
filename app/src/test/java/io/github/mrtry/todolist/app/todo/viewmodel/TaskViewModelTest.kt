@@ -5,7 +5,7 @@ import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.*
 import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.misc.extension.requireValue
-import io.github.mrtry.todolist.todo.domainservice.ToDoDomainService
+import io.github.mrtry.todolist.task.domainservice.TaskDomainService
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -21,7 +21,7 @@ class TaskViewModelTest {
     private lateinit var viewModel: TaskViewModel
 
     private lateinit var mockNavigator: ToDoNavigator
-    private lateinit var mockDomainService: ToDoDomainService
+    private lateinit var mockDomainService: TaskDomainService
 
     @Before
     fun setUp() {

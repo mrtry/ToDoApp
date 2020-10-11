@@ -8,8 +8,8 @@ import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.app.todo.viewmodel.converter.ToDoListItemViewModelConverter
 import io.github.mrtry.todolist.misc.extension.requireValue
 import io.github.mrtry.todolist.misc.ui.viewmodel.ToolbarViewModel
-import io.github.mrtry.todolist.todo.domainservice.ToDoDomainService
-import io.github.mrtry.todolist.todo.entity.ToDo
+import io.github.mrtry.todolist.task.domainservice.TaskDomainService
+import io.github.mrtry.todolist.task.entity.Task
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.TestCoroutineScope
@@ -27,7 +27,7 @@ class ToDoViewModelTest {
     private lateinit var viewModel: ToDoViewModel
 
     private lateinit var mockNavigator: ToDoNavigator
-    private lateinit var mockDomainService: ToDoDomainService
+    private lateinit var mockDomainService: TaskDomainService
     private lateinit var mockConverter: ToDoListItemViewModelConverter
 
     @Before
@@ -50,7 +50,7 @@ class ToDoViewModelTest {
 
     @Test
     fun load_success() = runBlockingTest {
-        val mockFlow: Flow<List<ToDo>> = flow { emit(listOf(mock())) }
+        val mockFlow: Flow<List<Task>> = flow { emit(listOf(mock())) }
         whenever(mockDomainService.connectToRepository()).thenReturn(mockFlow)
         whenever(mockConverter.convert(any())).thenReturn(mock())
 
@@ -70,7 +70,7 @@ class ToDoViewModelTest {
 
     @Test
     fun load_empty() = runBlockingTest {
-        val mockFlow: Flow<List<ToDo>> = flow { emit(listOf()) }
+        val mockFlow: Flow<List<Task>> = flow { emit(listOf()) }
         whenever(mockDomainService.connectToRepository()).thenReturn(mockFlow)
 
         viewModel.load()

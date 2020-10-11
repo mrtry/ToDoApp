@@ -4,8 +4,8 @@ import androidx.lifecycle.LifecycleOwner
 import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.app.todo.viewmodel.ToDoListItemViewModel
 import io.github.mrtry.todolist.di.scope.ActivityScope
-import io.github.mrtry.todolist.todo.domainservice.ToDoDomainService
-import io.github.mrtry.todolist.todo.entity.ToDo
+import io.github.mrtry.todolist.task.domainservice.TaskDomainService
+import io.github.mrtry.todolist.task.entity.Task
 import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
@@ -14,10 +14,10 @@ class ToDoListItemViewModelConverter
 @Inject constructor(
     private val lifecycleOwner: LifecycleOwner,
     private val navigator: ToDoNavigator,
-    private val domainService: ToDoDomainService,
+    private val domainService: TaskDomainService,
     private val coroutineScope: CoroutineScope
 ) {
-    fun convert(entity: ToDo): ToDoListItemViewModel =
+    fun convert(entity: Task): ToDoListItemViewModel =
         ToDoListItemViewModel(
             entity,
             lifecycleOwner,
