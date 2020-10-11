@@ -10,4 +10,6 @@ class AccountRepository
     private val firebaseAuth = FirebaseAuth.getInstance()
 
     fun isLoggedIn() = firebaseAuth.currentUser != null
+
+    fun logout() = firebaseAuth.signOut()
 }
