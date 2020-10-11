@@ -4,6 +4,6 @@
     <string name="to_do_activity_error_add_task_failed">登録に失敗しました。再度お試しください。</string>
     <string name="to_do_activity_error_update_task_failed">更新に失敗しました。再度お試しください。</string>
     <string name="to_do_activity_error_get_task_failed">取得に失敗しました。再度お試しください。</string>
-
-    <string name="menu_title_account_logout">ログアウト</string>
+    <string name="to_do_activity_menu_title_account_logout">ログアウト</string>
+    <string name="to_do_activity_alert_logout">ログアウトしますか？</string>
 </resources>

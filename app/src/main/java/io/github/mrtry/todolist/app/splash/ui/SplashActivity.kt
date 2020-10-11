@@ -1,5 +1,6 @@
 package io.github.mrtry.todolist.app.splash.ui
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,10 @@ import io.github.mrtry.todolist.misc.ui.binding.Bindable
 import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity(), Injectable<LoginComponent>, Bindable<ActivitySplashBinding> {
+    companion object {
+        fun createIntent(context: Context): Intent =
+            Intent(context, SplashActivity::class.java)
+    }
 
     @Inject
     internal lateinit var viewModel: SplashViewModel
