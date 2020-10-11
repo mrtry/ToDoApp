@@ -1,21 +1,26 @@
-package io.github.mrtry.todolist.todo.domainservice
+package io.github.mrtry.todolist.task.domainservice
 
 import com.google.firebase.firestore.FirebaseFirestoreException
-import io.github.mrtry.todolist.todo.client.ToDoRepository
-import io.github.mrtry.todolist.todo.entity.ToDo
+import io.github.mrtry.todolist.task.entity.Task
+import io.github.mrtry.todolist.task.repository.ToDoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ToDoDomainService
+class TaskDomainService
 @Inject constructor(
     private val repository: ToDoRepository
 ) {
     @Throws(FirebaseFirestoreException::class, IllegalArgumentException::class, IllegalStateException::class)
-    suspend fun saveToRepository(entity: ToDo) = withContext(Dispatchers.IO) {
+    suspend fun saveToRepository(entity: Task) = withContext(Dispatchers.IO) {
         repository.save(entity)
+    }
+
+    @Throws(FirebaseFirestoreException::class, IllegalArgumentException::class, IllegalStateException::class)
+    suspend fun removeFromRepository(entity: Task) = withContext(Dispatchers.IO) {
+        repository.remove(entity)
     }
 
     @Throws(FirebaseFirestoreException::class, IllegalArgumentException::class, IllegalStateException::class)

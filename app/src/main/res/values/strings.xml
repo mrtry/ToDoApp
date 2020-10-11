@@ -4,4 +4,18 @@
     <string name="to_do_activity_error_add_task_failed">登録に失敗しました。再度お試しください。</string>
     <string name="to_do_activity_error_update_task_failed">更新に失敗しました。再度お試しください。</string>
     <string name="to_do_activity_error_get_task_failed">取得に失敗しました。再度お試しください。</string>
+    <string name="to_do_activity_error_delete_task_failed">削除に失敗しました。再度お試しください。</string>
+    <string name="to_do_activity_menu_title_account_logout">ログアウト</string>
+    <string name="to_do_activity_alert_logout">ログアウトしますか？</string>
+    <string name="to_do_activity_alert_label_logout">ログアウト</string>
+    <string name="to_do_activity_alert_confirm_delete">タスクを削除しますか？</string>
+    <string name="to_do_activity_alert_label_delete">削除する</string>
+
+    <string name="edit_task_fragment_title">タスク詳細</string>
+    <string name="edit_task_fragment_label_title">タイトル</string>
+    <string name="edit_task_fragment_label_description">詳細</string>
+    <string name="edit_task_fragment_menu_update">更新</string>
+    <string name="edit_task_fragment_alert_confirm">変更内容が保存されていません。画面を閉じますか？</string>
+    <string name="edit_task_fragment_alert_label_positive">閉じる</string>
+    <string name="edit_task_fragment_error_update_task_failed">更新に失敗しました。再度お試しください。</string>
 </resources>

@@ -13,7 +13,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_item_container_height_one_line">
+        android:layout_height="@dimen/list_item_container_height_one_line"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="@{viewModel::onItemClick}"
+        android:onLongClick="@{viewModel::onLongClick}">
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkbox"
@@ -35,7 +38,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{viewModel.todo.title}"
+            android:text="@{viewModel.task.title}"
             android:ellipsize="end"
             android:maxLines="1" />
 

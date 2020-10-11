@@ -1,13 +1,15 @@
-package io.github.mrtry.todolist.auth
+package io.github.mrtry.todolist.auth.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthenticationClient
+class AccountRepository
 @Inject constructor() {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
     fun isLoggedIn() = firebaseAuth.currentUser != null
+
+    fun logout() = firebaseAuth.signOut()
 }

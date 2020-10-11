@@ -3,12 +3,16 @@ package io.github.mrtry.todolist.app.todo.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.mrtry.todolist.MainApplication
 import io.github.mrtry.todolist.R
 import io.github.mrtry.todolist.app.todo.ui.adapter.ToDoAdapter
+import io.github.mrtry.todolist.app.todo.ui.menu.ToDoMenuAction
 import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.app.todo.viewmodel.ToDoViewModel
 import io.github.mrtry.todolist.databinding.ActivityToDoBinding
@@ -66,6 +70,17 @@ class ToDoActivity : AppCompatActivity(), Injectable<ToDoComponent>, Bindable<Ac
 
         viewModel.load()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_activity_to_do, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = ToDoMenuAction
+        .valueOf(item.itemId)
+        .getActionHandler(component)
+        .handleAction() || super.onOptionsItemSelected(item)
 
     override fun onStop() {
         super.onStop()

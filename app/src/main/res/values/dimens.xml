@@ -13,4 +13,7 @@
     <dimen name="list_item_margin_horizontal">16dp</dimen>
     <dimen name="list_item_check_box_margin_start">8dp</dimen>
     <dimen name="list_item_divider_height">1dp</dimen>
+
+    <dimen name="edit_task_fragment_margin_vertical">8dp</dimen>
+    <dimen name="edit_task_fragment_margin_horizontal">16dp</dimen>
 </resources>
