@@ -18,6 +18,7 @@ import io.github.mrtry.todolist.di.component.ToDoComponent
 import io.github.mrtry.todolist.di.module.FragmentModule
 import io.github.mrtry.todolist.di.scope.FragmentScope
 import io.github.mrtry.todolist.di.utils.ComponentUtils
+import io.github.mrtry.todolist.misc.extension.observeNonNull
 import io.github.mrtry.todolist.misc.ui.binding.Bindable
 import io.github.mrtry.todolist.task.entity.Task
 import kotlinx.coroutines.CoroutineScope
@@ -92,6 +93,13 @@ class EditTaskDialogFragment : DialogFragment(), Injectable<EditTaskComponent>, 
                 navigator.onBackPressed()
                 true
             } else false
+        }
+
+        viewModel.title.observeNonNull(this@EditTaskDialogFragment) {
+            with(viewBinding.toolbar) {
+                menu.getItem(0).isEnabled = it.isNotEmpty()
+                invalidate()
+            }
         }
     }
 
