@@ -6,4 +6,7 @@
     <string name="to_do_activity_error_get_task_failed">取得に失敗しました。再度お試しください。</string>
     <string name="to_do_activity_menu_title_account_logout">ログアウト</string>
     <string name="to_do_activity_alert_logout">ログアウトしますか？</string>
+
+    <string name="edit_task_fragment_title">タスク詳細</string>
+    <string name="edit_task_fragment_menu_update">更新</string>
 </resources>

@@ -1,5 +1,6 @@
 package io.github.mrtry.todolist.app.todo.viewmodel
 
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import io.github.mrtry.todolist.R
@@ -14,24 +15,24 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class ToDoListItemViewModel(
-    todo: Task,
+    task: Task,
     lifecycleOwner: LifecycleOwner,
     private val navigator: ToDoNavigator,
     private val domainService: TaskDomainService,
     private val coroutineScope: CoroutineScope
 ) {
-    val todo: MutableLiveData<Task> = MutableLiveData(todo)
-    val isComplete: MutableLiveData<Boolean> = MutableLiveData(todo.isComplete)
+    val task: MutableLiveData<Task> = MutableLiveData(task)
+    val isComplete: MutableLiveData<Boolean> = MutableLiveData(task.isComplete)
     val isSaving: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private var currentIsCompleteState: Boolean = isComplete.requireValue()
 
     init {
         isComplete.observeNonNull(lifecycleOwner) {
-            this.todo.value = this.todo.requireValue().copy(isComplete = it)
+            this.task.value = this.task.requireValue().copy(isComplete = it)
         }
 
-        this.todo.observeNonNull(lifecycleOwner) {
+        this.task.observeNonNull(lifecycleOwner) {
             if (it.isComplete == currentIsCompleteState) return@observeNonNull
 
             coroutineScope.launch {
@@ -51,5 +52,9 @@ class ToDoListItemViewModel(
                 }
             }
         }
+    }
+
+    fun onItemClick(v: View?) {
+        navigator.showEditTask(task.requireValue())
     }
 }
