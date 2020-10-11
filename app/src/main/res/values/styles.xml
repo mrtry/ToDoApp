@@ -16,4 +16,14 @@
     <style name="Widget.Toolbar" parent="Base.Widget.Toolbar">
         <item name="android:elevation">@dimen/elevation_toolbar</item>
     </style>
+
+    <style name="Widget.FullScreenDialog" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+    </style>
 </resources>

@@ -7,11 +7,14 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.snackbar.Snackbar
 import io.github.mrtry.todolist.misc.ui.binding.Bindable
 
-abstract class AbsNavigator(private val activity: Activity) {
+abstract class AbsNavigator(
+    private val activity: AppCompatActivity
+) {
 
     protected open fun getBinding(): ViewDataBinding =
         (activity as Bindable<ViewDataBinding>).viewBinding

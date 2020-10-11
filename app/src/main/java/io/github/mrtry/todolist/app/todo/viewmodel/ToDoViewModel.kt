@@ -9,6 +9,7 @@ import io.github.mrtry.todolist.app.todo.ui.navigator.ToDoNavigator
 import io.github.mrtry.todolist.app.todo.viewmodel.converter.ToDoListItemViewModelConverter
 import io.github.mrtry.todolist.di.scope.ActivityScope
 import io.github.mrtry.todolist.misc.ui.viewmodel.ToolbarViewModel
+import io.github.mrtry.todolist.misc.ui.viewmodel.ViewModel
 import io.github.mrtry.todolist.task.domainservice.TaskDomainService
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +27,7 @@ class ToDoViewModel
     private val taskDomainService: TaskDomainService,
     private val converter: ToDoListItemViewModelConverter,
     private val coroutineScope: CoroutineScope
-) : SwipeRefreshLayout.OnRefreshListener {
+) : ViewModel, SwipeRefreshLayout.OnRefreshListener {
     val isRefreshing: MutableLiveData<Boolean> = MutableLiveData(false)
     val showEmptyStatus: MutableLiveData<Boolean> = MutableLiveData(false)
 

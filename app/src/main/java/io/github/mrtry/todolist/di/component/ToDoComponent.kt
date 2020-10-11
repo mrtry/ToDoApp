@@ -4,6 +4,7 @@ import dagger.Subcomponent
 import io.github.mrtry.todolist.app.todo.ui.ToDoActivity
 import io.github.mrtry.todolist.app.todo.ui.menu.ToDoMenuLogoutActionHandler
 import io.github.mrtry.todolist.di.module.ActivityModule
+import io.github.mrtry.todolist.di.module.FragmentModule
 import io.github.mrtry.todolist.di.scope.ActivityScope
 
 @ActivityScope
@@ -11,6 +12,8 @@ import io.github.mrtry.todolist.di.scope.ActivityScope
 interface ToDoComponent : Component {
 
     fun inject(activity: ToDoActivity)
+
+    fun plusEditTaskComponent(module: FragmentModule): EditTaskComponent
 
     val toDoMenuLogoutActionHandler: ToDoMenuLogoutActionHandler
 }

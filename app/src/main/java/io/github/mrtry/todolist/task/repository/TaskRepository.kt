@@ -2,6 +2,7 @@ package io.github.mrtry.todolist.task.repository
 
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.MetadataChanges
 import io.github.mrtry.todolist.misc.extension.await
 import io.github.mrtry.todolist.misc.extension.getDataFlow
 import io.github.mrtry.todolist.task.entity.Task
@@ -36,7 +37,7 @@ class ToDoRepository
 
     fun connect(): Flow<List<Task>> =
         db.collection(COLLECTION_PATH)
-            .getDataFlow { querySnapshot ->
+            .getDataFlow(MetadataChanges.INCLUDE) { querySnapshot ->
                 querySnapshot?.documents?.mapNotNull {
                     it.toObject(Task::class.java)
                 }

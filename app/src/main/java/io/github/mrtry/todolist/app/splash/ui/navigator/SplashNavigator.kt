@@ -1,6 +1,6 @@
 package io.github.mrtry.todolist.app.splash.ui.navigator
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthUI
 import io.github.mrtry.todolist.app.splash.ui.result.SplashActivityResult
 import io.github.mrtry.todolist.app.todo.ui.ToDoActivity
@@ -11,7 +11,7 @@ import javax.inject.Inject
 @ActivityScope
 class SplashNavigator
 @Inject constructor(
-    private val activity: Activity
+    private val activity: AppCompatActivity
 ) : AbsNavigator(activity) {
     fun navigateToToDo() {
         val intent = ToDoActivity.createIntent(activity)
