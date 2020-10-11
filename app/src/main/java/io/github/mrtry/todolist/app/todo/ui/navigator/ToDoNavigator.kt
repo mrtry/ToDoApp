@@ -23,7 +23,16 @@ class ToDoNavigator
     fun showLogoutAlert(func: () -> Unit) {
         showAlert(
             R.string.to_do_activity_alert_logout,
-            android.R.string.ok,
+            R.string.to_do_activity_alert_label_logout,
+            { _, _ -> func() },
+            android.R.string.cancel
+        )
+    }
+
+    fun showConfirmDeleteAlert(func: () -> Unit) {
+        showAlert(
+            R.string.to_do_activity_alert_confirm_delete,
+            R.string.to_do_activity_alert_label_delete,
             { _, _ -> func() },
             android.R.string.cancel
         )

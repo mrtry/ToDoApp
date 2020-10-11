@@ -21,7 +21,7 @@ class ToDoListItemViewModel(
     private val navigator: ToDoNavigator,
     private val domainService: TaskDomainService,
     private val coroutineScope: CoroutineScope
-) : ViewModel {
+) : ViewModel, View.OnLongClickListener {
     val task: MutableLiveData<Task> = MutableLiveData(task)
     val isComplete: MutableLiveData<Boolean> = MutableLiveData(task.isComplete)
     val isSaving: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -53,6 +53,25 @@ class ToDoListItemViewModel(
                 }
             }
         }
+    }
+
+    override fun onLongClick(p0: View?): Boolean {
+        navigator.showConfirmDeleteAlert {
+            coroutineScope.launch {
+                try {
+                    isSaving.value = true
+                    domainService.removeFromRepository(task.requireValue())
+                } catch (e: Exception) {
+                    if (e is CancellationException) return@launch
+
+                    Timber.e(e)
+                    navigator.showSnackBar(R.string.to_do_activity_error_delete_task_failed)
+                } finally {
+                    isSaving.value = false
+                }
+            }
+        }
+        return true
     }
 
     fun onItemClick(v: View?) {
