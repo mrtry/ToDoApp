@@ -9,7 +9,10 @@ class AccountRepository
 @Inject constructor() {
     private val firebaseAuth = FirebaseAuth.getInstance()
 
-    fun isLoggedIn() = firebaseAuth.currentUser != null
+    fun getUserId(): String? = firebaseAuth.currentUser?.uid
+        ?: throw IllegalStateException("no login")
+
+    fun isLoggedIn(): Boolean = firebaseAuth.currentUser != null
 
     fun logout() = firebaseAuth.signOut()
 }
